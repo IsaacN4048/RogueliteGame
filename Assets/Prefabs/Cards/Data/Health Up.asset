@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2acdce99f9c5df24fab87f5fb658c65b, type: 3}
+  m_Name: Health Up
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 6b4315fc4f3ade1498d16875ef5a2e3c, type: 3}
+  title: Crusty Loaf
+  rarity: {r: 0.4392157, g: 0, b: 1, a: 0.69411767}
+  statUpgradeType: 2
+  upgradeValue: 0.1
