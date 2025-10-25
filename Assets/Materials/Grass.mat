@@ -39,7 +39,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: 2bd8c72434a719b4aaf65ea2601f1378, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9e333da4ef2a5ce40b30a43171e236b9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -59,7 +59,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0
-    - _WindSpeed: 4
+    - _WindSpeed: 2
     - _WindStrength: 0.1
     m_Colors:
     - _Albedo: {r: 1, g: 1, b: 1, a: 1}

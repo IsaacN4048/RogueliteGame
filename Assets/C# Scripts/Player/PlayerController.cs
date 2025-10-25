@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public InputAction playerControls;
     public Collider walkingCollider;
 
     public Stat speedStat;
@@ -156,8 +158,10 @@ public class PlayerController : MonoBehaviour
     }
     private void MyInput()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        //horizontalInput = Input.GetAxisRaw("Horizontal");
+        //verticalInput = Input.GetAxisRaw("Vertical");
+
+        moveDirection = playerControls.ReadValue<Vector2>();
 
         //jump logic
         if(Input.GetKey(jumpKey) && readyToJump && grounded)
@@ -210,30 +214,7 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        // calculate movement direction
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-
-        //on slope
-        if(OnSlope() && !exitingSlope)
-        {
-            rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
-
-            //applies downward force to cancel out the gravity dragging you down, only when moving
-            if(rb.linearVelocity.y > 0)
-                rb.AddForce(Vector3.down * 10f, ForceMode.Force);
-
-        }
-
-        //on ground
-        else if (grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 20f, ForceMode.Force); //increase (10f) float value when sprinting?
-
-        //in air
-        else if (!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
-
-        //turn gravity off when on slope
-        rb.useGravity = !OnSlope();
+        rb.linearVelocity = new Vector3(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed, moveDirection.z * moveSpeed);
     }
 
     private void SpeedControl()
@@ -310,5 +291,16 @@ public class PlayerController : MonoBehaviour
         //isCrouching = false;
     }
 
-    
+    private void OnEnable()
+    {
+        playerControls.Enable();
+
+    }
+    private void OnDisable()
+    {
+        playerControls.Disable();
+
+    }
+
+
 }
