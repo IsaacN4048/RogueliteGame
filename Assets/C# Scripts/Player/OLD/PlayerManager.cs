@@ -6,6 +6,16 @@ namespace Player
 {
     public class PlayerManager : MonoBehaviour
     {
+        public static PlayerManager instance; //SINGLETON
+
+        private void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+            }
+        }
+
         [Header("Components")]
         [SerializeField] FirstPersonController fpController;
 
@@ -20,6 +30,18 @@ namespace Player
             fpController.LookInput = value.Get<Vector2>();
         }
 
+        void OnSprint(InputValue value)
+        {
+            fpController.SprintInput = value.isPressed;
+        }
+
+        void OnJump(InputValue value)
+        {
+            if(value.isPressed)
+            {
+                fpController.TryJump();
+            }
+        }
         #endregion
 
 
@@ -39,6 +61,11 @@ namespace Player
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+        }
+        public void FreeCursor()
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
         }
 
         #endregion

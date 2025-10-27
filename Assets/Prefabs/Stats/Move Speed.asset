@@ -16,7 +16,7 @@ MonoBehaviour:
   baseValue: 4
   startingValue: 4
   flatIncrease: 0
-  totalValue: 4
+  totalValue: 5
   baseModifiers: 
   percModifiers: []
   flatIncreases: []
