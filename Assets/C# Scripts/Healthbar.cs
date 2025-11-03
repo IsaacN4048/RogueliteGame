@@ -6,23 +6,28 @@ using UnityEngine.UI;
 
 public class Healthbar : MonoBehaviour
 {
-    public PlayerHealth playerHealth;
+    private PlayerHealth playerHealth;
     public Image healthJuice;
     public Image healthJuiceBuffer;
     public TextMeshProUGUI healthNumbers;
+    public Slider slider;
+    public Slider bufferSlider;
 
     private void Start()
     {
-        healthJuice.fillAmount = 1f;
+        //healthJuice.fillAmount = 1f;
+        playerHealth = PlayerHealth.instance;
+        slider = GetComponent<Slider>();
+        bufferSlider.maxValue = playerHealth.maxHealth;
+        bufferSlider.value = bufferSlider.maxValue;
     }
     private void Update()
     {
-        //healthJuice.fillAmount = playerHealth.currentHealth / playerHealth.maxHealth;
+        slider.maxValue = playerHealth.maxHealth;
+        slider.value = playerHealth.currentHealth;
 
-        //healthJuiceBuffer.fillAmount = Mathf.Lerp(healthJuice.fillAmount, healthJuice.fillAmount, Time.deltaTime * 1f);
 
-
-        healthJuice.fillAmount = Mathf.Lerp(healthJuice.fillAmount, playerHealth.currentHealth / playerHealth.maxHealth, Time.deltaTime * 16f);
+        //healthJuice.fillAmount = Mathf.Lerp(healthJuice.fillAmount, playerHealth.currentHealth / playerHealth.maxHealth, Time.deltaTime * 16f);
 
         StartCoroutine(Buffer());
 
@@ -34,7 +39,11 @@ public class Healthbar : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
 
-        healthJuiceBuffer.fillAmount = Mathf.Lerp(healthJuiceBuffer.fillAmount, healthJuice.fillAmount, Time.deltaTime * 4f);
+        //healthJuiceBuffer.fillAmount = Mathf.Lerp(healthJuiceBuffer.fillAmount, healthJuice.fillAmount, Time.deltaTime * 4f);
+
+        bufferSlider.value = Mathf.Lerp(bufferSlider.value, slider.value, Time.deltaTime * 4f);
 
     }
+
+
 }
