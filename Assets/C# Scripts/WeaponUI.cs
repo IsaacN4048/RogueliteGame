@@ -11,6 +11,7 @@ public class WeaponUI : MonoBehaviour
 
     public void Update()
     {
+        /*
         if(weaponScript.weaponIcon != null)
         {
             icon.color = Color.white;
@@ -20,5 +21,6 @@ public class WeaponUI : MonoBehaviour
         {
             icon.color = Color.clear;
         }
+        */
     }
 }

@@ -18,7 +18,7 @@ public class Weapon : MonoBehaviour
 
     public void Equip()
     {
-        playerWeaponScript.currentWeapon = this.gameObject;
-        playerWeaponScript.GetWeaponData();
+        //playerWeaponScript.currentWeapon = this.gameObject;
+        //playerWeaponScript.GetWeaponData();
     }
 }

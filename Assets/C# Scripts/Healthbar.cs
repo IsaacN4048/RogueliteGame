@@ -11,15 +11,15 @@ public class Healthbar : MonoBehaviour
     public Image healthJuiceBuffer;
     public TextMeshProUGUI healthNumbers;
     public Slider slider;
-    public Slider bufferSlider;
+    //public Slider bufferSlider;
 
     private void Start()
     {
         //healthJuice.fillAmount = 1f;
         playerHealth = PlayerHealth.instance;
         slider = GetComponent<Slider>();
-        bufferSlider.maxValue = playerHealth.maxHealth;
-        bufferSlider.value = bufferSlider.maxValue;
+        //bufferSlider.maxValue = playerHealth.maxHealth;
+        //bufferSlider.value = bufferSlider.maxValue;
     }
     private void Update()
     {
@@ -41,7 +41,7 @@ public class Healthbar : MonoBehaviour
 
         //healthJuiceBuffer.fillAmount = Mathf.Lerp(healthJuiceBuffer.fillAmount, healthJuice.fillAmount, Time.deltaTime * 4f);
 
-        bufferSlider.value = Mathf.Lerp(bufferSlider.value, slider.value, Time.deltaTime * 4f);
+        //bufferSlider.value = Mathf.Lerp(bufferSlider.value, slider.value, Time.deltaTime * 4f);
 
     }
 

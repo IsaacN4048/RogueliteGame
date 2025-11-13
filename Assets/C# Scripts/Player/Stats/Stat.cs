@@ -30,7 +30,7 @@ public class Stat : ScriptableObject //THIS SCRIPT IS AMAZING AND WORKS PERFECTL
     {
         //CalculateValue();
 
-        Debug.Log("UPDATE LOOP calc");
+        //Debug.Log("UPDATE LOOP calc");
     }
     public float CalculateValue() //call when modifiers are changed
     {
@@ -55,7 +55,7 @@ public class Stat : ScriptableObject //THIS SCRIPT IS AMAZING AND WORKS PERFECTL
         totalValue = almostTotalValue;
 
 
-        Debug.Log("CalculateValue");
+        //Debug.Log("CalculateValue");
 
         return totalValue;
     }

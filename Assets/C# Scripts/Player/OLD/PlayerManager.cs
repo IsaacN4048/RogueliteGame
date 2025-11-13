@@ -18,6 +18,7 @@ namespace Player
 
         [Header("Components")]
         [SerializeField] FirstPersonController fpController;
+        [SerializeField] PlayerWeapon playerWeapon;
 
 
         #region Input Handling
@@ -42,6 +43,17 @@ namespace Player
                 fpController.TryJump();
             }
         }
+
+        //POTENTIALLY
+
+        void OnAttack(InputValue value) //currently calls PlayerWeapon method, instead of directly referencing playerRaycast... FIX
+        { 
+            if(value.isPressed)
+            {
+                playerWeapon.MainAttack();
+                Debug.Log("TRIED TO ATTACK");
+            }
+        }
         #endregion
 
 
@@ -55,6 +67,7 @@ namespace Player
         void Start()
         {
             SetFirstPersonCursor();
+            playerWeapon = GetComponent<PlayerWeapon>();
         }
 
         public void SetFirstPersonCursor()
