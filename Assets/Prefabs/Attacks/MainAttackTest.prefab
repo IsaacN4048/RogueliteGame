@@ -156,3 +156,5 @@ MonoBehaviour:
   shotVelocity: 30
   lifetime: 5
   finalDamage: 5
+  hitCounter: 0
+  maxHits: 1

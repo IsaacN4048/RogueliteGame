@@ -9,6 +9,10 @@ public class MainAttack : MonoBehaviour
     public float lifetime;
     public float finalDamage;
 
+    [Header("Lifetime")]
+    public int hitCounter = 0;
+    public int maxHits = 1; //PlayerStats.instance.PiercingStat.totalValue;
+
     private void Start()
     {
     Rigidbody rb = GetComponent<Rigidbody>();
@@ -23,8 +27,13 @@ public class MainAttack : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Enemy"))
         {
+            hitCounter++;
             Enemy enemyScript = collision.gameObject.GetComponent<Enemy>();
             enemyScript.TakeDamage(finalDamage);
+        }
+        if (hitCounter >= maxHits)
+        {
+            Destroy(gameObject);
         }
     }
 }

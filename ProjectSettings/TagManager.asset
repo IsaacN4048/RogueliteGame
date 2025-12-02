@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Test
   - Enemy
+  - GroundItem
   layers:
   - Default
   - TransparentFX

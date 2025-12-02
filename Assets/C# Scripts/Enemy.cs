@@ -6,10 +6,12 @@ public class Enemy : MonoBehaviour
 {
     private GameObject player;
     private PlayerHealth playerHealth;
+    private Transform playerTransform;
 
     [Header("EnemyStats")]
     public float maxHealth;
     public float currentHealth;
+    public float moveSpeed;
 
     //public float damageAmount;
 
@@ -17,20 +19,27 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealth>();
+        playerTransform = player.transform;
 
 
         currentHealth = maxHealth;
     }
 
+   
+    public void Update()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, moveSpeed * Time.deltaTime);
+    }
+
+
     public void TakeDamage(float amount)
     {
         currentHealth = currentHealth - amount;
-        if(currentHealth < 0)
+        if (currentHealth < 0)
         {
             Destroy(gameObject);
         }
     }
-
 
 
 
