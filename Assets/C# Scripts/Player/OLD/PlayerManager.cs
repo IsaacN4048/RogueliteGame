@@ -54,6 +54,26 @@ namespace Player
                 Debug.Log("TRIED TO ATTACK");
             }
         }
+
+        void OnReload(InputValue value)
+        {
+            if (value.isPressed)
+            {
+                playerWeapon.Reload();
+                Debug.Log("Reloaded");
+            }
+        }
+
+        //TEST
+
+        void OnSpawn(InputValue value)
+        {
+            if (value.isPressed)
+            {
+
+                Debug.Log("Tried to Spawn item");
+            }
+        }
         #endregion
 
 

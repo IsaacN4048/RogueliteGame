@@ -8,17 +8,25 @@ public class PlayerWeapon : MonoBehaviour
     private PlayerRaycast raycastScript;
     public GameObject mainAttack;
 
+    [Header("Ammo")]
+
+    public int currentAmmo;
+    public int maxAmmo;
+    public int reserveAmmo; //SHOULD BE DETERMINED BY AMMO WITHIN INVENTORY
+
     public void Start()
     {
         raycastScript = PlayerRaycast.instance;
+        currentAmmo = maxAmmo; //starts you with max ammo every round
     }
 
 
     public void MainAttack()
     {
-        if(mainAttack != null)
+        if(mainAttack != null && currentAmmo >= 1)
         {
             Instantiate(mainAttack, raycastScript.firepoint.position, Camera.main.transform.rotation); //too much referencing?
+            currentAmmo = currentAmmo - 1;
         }
         else
         {
@@ -41,6 +49,23 @@ public class PlayerWeapon : MonoBehaviour
 
     }
 
+    public void Reload() 
+    {
+        if(reserveAmmo >= maxAmmo)
+        {
+            currentAmmo = maxAmmo; //add max bullets from reserve
+            reserveAmmo = reserveAmmo - maxAmmo; //remove added bullets from reserve
+        }
+        else if(reserveAmmo >= 1 && reserveAmmo < maxAmmo)
+        {
+            currentAmmo += reserveAmmo;
+            reserveAmmo = 0;
+        }
+        else
+        {
+            return;
+        }
+    }
 
 
 

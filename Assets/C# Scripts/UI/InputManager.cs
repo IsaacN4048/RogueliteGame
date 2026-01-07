@@ -40,5 +40,7 @@ public class InputManager : MonoBehaviour
         NavigationInput = _navigationAction.ReadValue<Vector2>();
 
         MenuOpenCloseInput = _menuOpenCloseAction.WasPressedThisFrame();
+
+       
     }
 }

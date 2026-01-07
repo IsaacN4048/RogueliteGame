@@ -25,8 +25,10 @@ public class MainAttack : MonoBehaviour
     }
     public void OnCollisionEnter(Collision collision)
     {
+       
         if(collision.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log("Hit Enemy");
             hitCounter++;
             Enemy enemyScript = collision.gameObject.GetComponent<Enemy>();
             enemyScript.TakeDamage(finalDamage);

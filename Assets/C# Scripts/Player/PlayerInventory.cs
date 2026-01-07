@@ -16,7 +16,7 @@ public class PlayerInventory : MonoBehaviour
 
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) //NEEDS OVERHAUL
     {
         if(other.CompareTag("GroundItem"))
         {
