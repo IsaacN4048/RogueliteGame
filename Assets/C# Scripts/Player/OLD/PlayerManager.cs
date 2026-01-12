@@ -54,15 +54,16 @@ namespace Player
                 Debug.Log("TRIED TO ATTACK");
             }
         }
-
-        void OnReload(InputValue value)
+        void OnSecondaryAttack(InputValue value) //currently calls PlayerWeapon method, instead of directly referencing playerRaycast... FIX
         {
             if (value.isPressed)
             {
-                playerWeapon.Reload();
-                Debug.Log("Reloaded");
+                playerWeapon.SecondaryAttack();
+                Debug.Log("TRIED TO ATTACK");
             }
         }
+
+
 
         //TEST
 

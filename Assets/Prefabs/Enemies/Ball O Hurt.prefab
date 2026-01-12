@@ -173,7 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   maxHealth: 10
   currentHealth: 0
-  moveSpeed: 0
+  moveSpeed: 2
 --- !u!54 &3820442069556899926
 Rigidbody:
   m_ObjectHideFlags: 0

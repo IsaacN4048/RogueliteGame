@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class MainAttack : MonoBehaviour
+public class RangedProjectile : MonoBehaviour //as this is ranged, make your secondary a melee
 {
     public float shotVelocity;
     public float lifetime;
     public float finalDamage;
+
+    [Header("Cooldown")]
+    public float cooldown;
 
     [Header("Lifetime")]
     public int hitCounter = 0;

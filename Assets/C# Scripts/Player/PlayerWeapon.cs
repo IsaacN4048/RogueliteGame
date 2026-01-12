@@ -2,69 +2,114 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerWeapon : MonoBehaviour
 {
     private PlayerRaycast raycastScript;
     public GameObject mainAttack;
+    public Image mainAttackCooldownImage;
+    public GameObject secondaryAttack;
+    public Image secondaryAttackCooldownImage;
 
-    [Header("Ammo")]
+    [Header("Cooldowns")]
 
-    public int currentAmmo;
-    public int maxAmmo;
-    public int reserveAmmo; //SHOULD BE DETERMINED BY AMMO WITHIN INVENTORY
+    public float mainCooldownTime;
+    public bool canMainAttack = true;
+
+    public float secondaryCooldownTime;
+    public bool canSecondaryAttack = true;
+
 
     public void Start()
     {
         raycastScript = PlayerRaycast.instance;
-        currentAmmo = maxAmmo; //starts you with max ammo every round
+        UpdateAttacks();
+       
     }
 
+    public void UpdateAttacks()
+    {
+        if (mainAttack != null && secondaryAttack != null)
+        {
+            //get cooldowns from the specific projectiles
+            float mainCooldown = mainAttack.GetComponent<RangedProjectile>().cooldown;
+            float secondaryCooldown = secondaryAttack.GetComponent<RangedProjectile>().cooldown;
+
+            //apply them to the variables here, in the future, run them through a formula that multiplies by PlayerStats.cooldown
+            mainCooldownTime = mainCooldown;
+            secondaryCooldownTime = secondaryCooldown;
+        }
+        else
+            return;
+    }
 
     public void MainAttack()
     {
-        if(mainAttack != null && currentAmmo >= 1)
+        if(canMainAttack && mainAttack != null)
         {
             Instantiate(mainAttack, raycastScript.firepoint.position, Camera.main.transform.rotation); //too much referencing?
-            currentAmmo = currentAmmo - 1;
+            canMainAttack = false;
+            StartCoroutine(MainAttackCooldown());
+            
         }
         else
         {
             Debug.Log("FAILED TO ATTACK");
             return;
         }
+    }
 
+    private IEnumerator MainAttackCooldown()
+    {
+        //yield return new WaitForSeconds(mainCooldownTime);
 
-        /*
-         if(mainAttack != null)
+        float timer = 0f;
+        mainAttackCooldownImage.fillAmount = 1f;
+
+        while(timer < mainCooldownTime)
         {
-            raycastScript.RayCastByTag("Enemy");
+            timer += Time.deltaTime;
+            mainAttackCooldownImage.fillAmount = 1f - (timer / mainCooldownTime);
+            yield return null;
+        }
+
+        mainAttackCooldownImage.fillAmount = 0f;
+        canMainAttack=true;
+    }
+
+    public void SecondaryAttack()
+    {
+        if (canSecondaryAttack && secondaryAttack != null)
+        {
+            Instantiate(secondaryAttack, raycastScript.firepoint.position, Camera.main.transform.rotation); //too much referencing?
+            canSecondaryAttack = false;
+            StartCoroutine(SecondaryAttackCooldown());
         }
         else
         {
             Debug.Log("FAILED TO ATTACK");
             return;
         }
-         */
 
     }
 
-    public void Reload() 
+    private IEnumerator SecondaryAttackCooldown()
     {
-        if(reserveAmmo >= maxAmmo)
+        //yield return new WaitForSeconds(secondaryCooldownTime);
+
+        float timer = 0f;
+        secondaryAttackCooldownImage.fillAmount = 1f;
+
+        while (timer < secondaryCooldownTime)
         {
-            currentAmmo = maxAmmo; //add max bullets from reserve
-            reserveAmmo = reserveAmmo - maxAmmo; //remove added bullets from reserve
+            timer += Time.deltaTime;
+            secondaryAttackCooldownImage.fillAmount = 1f - (timer / secondaryCooldownTime);
+            yield return null;
         }
-        else if(reserveAmmo >= 1 && reserveAmmo < maxAmmo)
-        {
-            currentAmmo += reserveAmmo;
-            reserveAmmo = 0;
-        }
-        else
-        {
-            return;
-        }
+
+        secondaryAttackCooldownImage.fillAmount = 0f;
+        canSecondaryAttack = true;
     }
 
 
