@@ -10,17 +10,18 @@ public class InputManager : MonoBehaviour
 
     public GameObject player;
 
+   
+    public static PlayerInput playerInput { get; set; } //THE KEYBINDING COMPONENT ON THE PLAYER
+    public bool MenuOpenCloseInput { get; private set; }
     public Vector2 NavigationInput { get; set; }
-
+    private InputAction _menuOpenCloseAction; //is Tab
     private InputAction _navigationAction; //allows keyboard navigation between buttons
 
-    public static PlayerInput _playerInput { get; set; }
 
+    [Header("Holding Keys")]
+    [SerializeField] public bool holdingLeft; //set bool here, reference it in PlayerWeapon
+    [SerializeField] public bool holdingRight;
 
-    public bool MenuOpenCloseInput { get; private set; }
-    private InputAction _menuOpenCloseAction;
-
-    
 
     private void Awake()
     {
@@ -29,10 +30,10 @@ public class InputManager : MonoBehaviour
             instance = this;
         }
 
-        _playerInput = player.GetComponent<PlayerInput>();
-        _navigationAction = _playerInput.actions["Navigate"];
+        playerInput = player.GetComponent<PlayerInput>();
+        _navigationAction = playerInput.actions["Navigate"];
 
-        _menuOpenCloseAction = _playerInput.actions["MenuOpenClose"];
+        _menuOpenCloseAction = playerInput.actions["MenuOpenClose"];
     }
 
     private void Update()
@@ -41,6 +42,9 @@ public class InputManager : MonoBehaviour
 
         MenuOpenCloseInput = _menuOpenCloseAction.WasPressedThisFrame();
 
-       
+
+        holdingLeft = playerInput.currentActionMap["Attack"].ReadValue<float>() > 0;
+        holdingRight = playerInput.currentActionMap["SecondaryAttack"].ReadValue<float>() > 0;
+
     }
 }

@@ -1,9 +1,16 @@
 using NUnit.Framework;
+using Player;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
     public GameObject[] itemSlots; //array of inventory spaces
+    public PlayerWeapon weaponScript;//the player's script for weapon managing
+
+    public void Start()
+    {
+        weaponScript = PlayerManager.instance.gameObject.GetComponent<PlayerWeapon>(); //sets script to proper one
+    }
 
     public void FindSlot()
     {
@@ -25,7 +32,16 @@ public class PlayerInventory : MonoBehaviour
             itemSlotScript.itemData = other.GetComponent<ItemData>();
             itemSlotScript.DisplayItem();
 
-            Destroy(other.gameObject);
+            if(other.GetComponent<Weapon>() != null)
+            {
+                weaponScript.equippedWeapon = other.gameObject;
+                weaponScript.UpdateAttacks();
+                return;
+            }
+            else
+            {
+                Destroy(other.gameObject);
+            }
         }
     }
 

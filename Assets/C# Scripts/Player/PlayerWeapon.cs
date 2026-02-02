@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerWeapon : MonoBehaviour
 {
+    public GameObject equippedWeapon;
     private PlayerRaycast raycastScript;
     public GameObject mainAttack;
     public Image mainAttackCooldownImage;
@@ -20,6 +21,33 @@ public class PlayerWeapon : MonoBehaviour
     public float secondaryCooldownTime;
     public bool canSecondaryAttack = true;
 
+    ///////////////////////////////////////////////////////
+    
+    
+     private InputManager inputManagerScript;
+
+    private void Awake()
+    {
+        inputManagerScript = InputManager.instance;
+    }
+
+    private void FixedUpdate()
+    {
+        if (inputManagerScript.holdingLeft)
+        {
+            MainAttack();
+            Debug.Log("TRIED TO ATTACK");
+        }
+        if (inputManagerScript.holdingRight)
+        {
+            SecondaryAttack();
+            Debug.Log("TRIED TO ATTACK");
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////
+
+
 
     public void Start()
     {
@@ -28,10 +56,17 @@ public class PlayerWeapon : MonoBehaviour
        
     }
 
-    public void UpdateAttacks()
+    public void UpdateAttacks() //sets cooldowns and projectiles based on equippedWeapon
     {
-        if (mainAttack != null && secondaryAttack != null)
+        if(equippedWeapon == null)
         {
+            return;
+        }
+        else
+        {
+            mainAttack = equippedWeapon.GetComponent<Weapon>().primaryProjectile;
+            secondaryAttack = equippedWeapon.GetComponent<Weapon>().secondaryProjectile;
+
             //get cooldowns from the specific projectiles
             float mainCooldown = mainAttack.GetComponent<RangedProjectile>().cooldown;
             float secondaryCooldown = secondaryAttack.GetComponent<RangedProjectile>().cooldown;
@@ -40,8 +75,7 @@ public class PlayerWeapon : MonoBehaviour
             mainCooldownTime = mainCooldown;
             secondaryCooldownTime = secondaryCooldown;
         }
-        else
-            return;
+
     }
 
     public void MainAttack()
@@ -76,6 +110,8 @@ public class PlayerWeapon : MonoBehaviour
 
         mainAttackCooldownImage.fillAmount = 0f;
         canMainAttack=true;
+
+      
     }
 
     public void SecondaryAttack()
@@ -110,6 +146,8 @@ public class PlayerWeapon : MonoBehaviour
 
         secondaryAttackCooldownImage.fillAmount = 0f;
         canSecondaryAttack = true;
+
+        
     }
 
 

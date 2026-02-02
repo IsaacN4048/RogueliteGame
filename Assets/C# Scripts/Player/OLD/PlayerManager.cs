@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Player
 {
@@ -18,7 +19,7 @@ namespace Player
 
         [Header("Components")]
         [SerializeField] FirstPersonController fpController;
-        [SerializeField] PlayerWeapon playerWeapon;
+        //[SerializeField] PlayerWeapon playerWeapon;
 
 
         #region Input Handling
@@ -44,29 +45,7 @@ namespace Player
             }
         }
 
-        //POTENTIALLY
-
-        void OnAttack(InputValue value) //currently calls PlayerWeapon method, instead of directly referencing playerRaycast... FIX
-        { 
-            if(value.isPressed)
-            {
-                playerWeapon.MainAttack();
-                Debug.Log("TRIED TO ATTACK");
-            }
-        }
-        void OnSecondaryAttack(InputValue value) //currently calls PlayerWeapon method, instead of directly referencing playerRaycast... FIX
-        {
-            if (value.isPressed)
-            {
-                playerWeapon.SecondaryAttack();
-                Debug.Log("TRIED TO ATTACK");
-            }
-        }
-
-
-
         //TEST
-
         void OnSpawn(InputValue value)
         {
             if (value.isPressed)
@@ -75,6 +54,30 @@ namespace Player
                 Debug.Log("Tried to Spawn item");
             }
         }
+
+
+        //SCRAP THIS!!!
+
+        /*
+        void OnAttack(InputValue value) //currently calls PlayerWeapon method, instead of directly referencing playerRaycast... FIX
+        { 
+            if(inputManagerScript.holdingLeft)
+            {
+                playerWeapon.MainAttack();
+                Debug.Log("TRIED TO ATTACK");
+            }
+        }
+        void OnSecondaryAttack(InputValue value) //currently calls PlayerWeapon method, instead of directly referencing playerRaycast... FIX
+        {
+            if (inputManagerScript.holdingRight)
+            {
+                playerWeapon.SecondaryAttack();
+                Debug.Log("TRIED TO ATTACK");
+            }
+        }
+
+        */
+
         #endregion
 
 
@@ -88,7 +91,7 @@ namespace Player
         void Start()
         {
             SetFirstPersonCursor();
-            playerWeapon = GetComponent<PlayerWeapon>();
+            //playerWeapon = GetComponent<PlayerWeapon>();
         }
 
         public void SetFirstPersonCursor()
