@@ -6,6 +6,7 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _mainMenuCanvas;
     [SerializeField] private GameObject _settingsMenuCanvas;
+    [SerializeField] private GameObject _optionsMenuPanel;
 
     private bool isPaused;
 
@@ -53,8 +54,9 @@ public class MenuManager : MonoBehaviour
 
     private void CloseAllMenus()
     {
-       _mainMenuCanvas.SetActive(false);
+        _mainMenuCanvas.SetActive(false);
         _settingsMenuCanvas.SetActive(false);
+        _optionsMenuPanel.SetActive(false);
     }
 
     private void OpenMainMenu()
@@ -63,6 +65,17 @@ public class MenuManager : MonoBehaviour
         _settingsMenuCanvas.SetActive(false);
     }
 
+    public void ToggleSettingsMenu()
+    {
+        if(_optionsMenuPanel.activeSelf)
+        {
+            _optionsMenuPanel.SetActive(false);
+        }
+        else if(_optionsMenuPanel.activeSelf == false) 
+        {
+            _optionsMenuPanel.SetActive(true);
+        }
+    }
 
 
 }
