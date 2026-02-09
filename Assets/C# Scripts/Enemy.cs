@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,10 @@ public class Enemy : MonoBehaviour
     private GameObject player;
     private PlayerHealth playerHealth;
     private Transform playerTransform;
+
+    //public GameObject floatingText;
+    //public GameObject floatingTextPos;
+    //public string floatingTextNumber;
 
     [Header("EnemyStats")]
     public float maxHealth;
@@ -35,11 +40,28 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float amount)
     {
         currentHealth = currentHealth - amount;
+        //floatingTextNumber = amount.ToString();
+
+        /*if (currentHealth > 0 && floatingText != null )
+        {
+            ShowDamageNumbers();
+        }
+        */
+       
         if (currentHealth < 0)
         {
             Destroy(gameObject);
         }
     }
+
+    /*
+    private void ShowDamageNumbers()
+    {
+        var obj = Instantiate(floatingText, floatingTextPos.transform.position, Quaternion.identity, transform);
+        obj.GetComponent<TextMesh>().text = floatingTextNumber;
+    }
+
+    */
 
 
 

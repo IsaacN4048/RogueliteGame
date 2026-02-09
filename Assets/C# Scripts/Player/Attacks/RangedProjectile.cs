@@ -16,6 +16,9 @@ public class RangedProjectile : MonoBehaviour //as this is ranged, make your sec
     public int hitCounter = 0;
     public int maxHits = 1; //PlayerStats.instance.PiercingStat.totalValue;
 
+    [Header("Damage Numbers")]
+    [SerializeField] private GameObject floatingText;
+
     private void Start()
     {
     Rigidbody rb = GetComponent<Rigidbody>();
@@ -26,19 +29,43 @@ public class RangedProjectile : MonoBehaviour //as this is ranged, make your sec
         }
         Destroy(gameObject, lifetime);
     }
+    
+
     public void OnCollisionEnter(Collision collision)
     {
-       
-        if(collision.gameObject.CompareTag("Enemy"))
+        switch(collision.gameObject.tag) //checks the tag of the collision
         {
-            Debug.Log("Hit Enemy");
-            hitCounter++;
-            Enemy enemyScript = collision.gameObject.GetComponent<Enemy>();
-            enemyScript.TakeDamage(finalDamage);
-        }
-        if (hitCounter >= maxHits)
-        {
-            Destroy(gameObject);
+            case "Enemy":
+
+                hitCounter++;
+                if (hitCounter >= maxHits) //this is piercing essentially
+                {
+                    Destroy(gameObject);
+                }
+
+                Enemy enemyScript = collision.gameObject.GetComponent<Enemy>();
+                enemyScript.TakeDamage(finalDamage);
+
+                if (GameManager.instance.damageNumbers) //lets you toggle off for performance
+                {
+                    ShowDamageNumbers(finalDamage.ToString(), collision.GetContact(0).point);
+                }
+
+                break;
+
         }
     }
+
+    private void ShowDamageNumbers(string damageText, Vector3 textPos)
+    {
+        if(floatingText != null) //allows you to turn off damage numbers with a simple bool
+        {
+            GameObject prefab = Instantiate(floatingText, textPos, Quaternion.identity);
+            prefab.GetComponent<TextMesh>().text = damageText;
+        }
+       
+    }
+
+
+
 }

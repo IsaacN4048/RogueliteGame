@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4418834303758362062}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.28865, y: -0, z: 0.05205}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -153,9 +153,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa739a2dd6ae554e9344c9d7f4e52d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  shotVelocity: 30
+  shotVelocity: 40
   lifetime: 2
-  finalDamage: 0.1
+  finalDamage: 1
   cooldown: 0.1
   hitCounter: 0
   maxHits: 1
+  floatingText: {fileID: 4620042306085268388, guid: 037632bf410b0e344a5fd6f2ab588c81, type: 3}
