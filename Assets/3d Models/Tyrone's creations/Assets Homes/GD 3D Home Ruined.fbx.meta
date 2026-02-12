@@ -3,11 +3,21 @@ guid: f48a5a3a80371f94d915ca68ad85e416
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Textures Earth Bricks Leaves Mud 1 lo res
+    second: {fileID: 2100000, guid: 295a964ef6274c740ba2329aa4fb9b45, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Textures Earth Wood Planks lo res
+    second: {fileID: 2100000, guid: 9c98d4db9d64c3845bcfcc27c7631317, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4

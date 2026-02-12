@@ -3,7 +3,32 @@ guid: 6782cfcff5c57924885993dd9bf61470
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass lo res
+    second: {fileID: 2100000, guid: 6e7520406b57b084d85122258b1d4923, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Textures Earth Bricks 1 lo res
+    second: {fileID: 2100000, guid: 9ceee7cd5389f5f4a80bd6f44b947b7c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Textures Earth Wood Planks Painted lo res red
+    second: {fileID: 2100000, guid: 8ae27f678b659344c83a8ad174e5dd95, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Textures Earth Wood Planks lo res.001
+    second: {fileID: 2100000, guid: f69a3d01c2b3b7c47b61d273224dd7f1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Textures Grass and Mud Lo Res
+    second: {fileID: 2100000, guid: 812199f1496c377429285a44a8e58759, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
