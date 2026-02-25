@@ -5,6 +5,12 @@ using System.Collections.Generic;
 
 public class RangedProjectile : MonoBehaviour //as this is ranged, make your secondary a melee
 {
+    [Header("User")]
+    public bool PlayerFired;
+    public bool EnemyFired;
+
+
+    [Header("Stats")]
     public float shotVelocity;
     public float lifetime;
     public float finalDamage;
@@ -23,7 +29,7 @@ public class RangedProjectile : MonoBehaviour //as this is ranged, make your sec
     {
     Rigidbody rb = GetComponent<Rigidbody>();
 
-        if(rb != null )
+        if(rb != null && PlayerFired )
         {
             rb.AddForce(gameObject.transform.forward * shotVelocity, ForceMode.Impulse);
         }
@@ -36,21 +42,46 @@ public class RangedProjectile : MonoBehaviour //as this is ranged, make your sec
         switch(collision.gameObject.tag) //checks the tag of the collision
         {
             case "Enemy":
-
-                hitCounter++;
-                if (hitCounter >= maxHits) //this is piercing essentially
+                if(PlayerFired)
                 {
-                    Destroy(gameObject);
+                    hitCounter++;
+                    if (hitCounter >= maxHits) //this is piercing essentially
+                    {
+                        Destroy(gameObject);
+                    }
+
+                    Enemy enemyScript = collision.gameObject.GetComponent<Enemy>();
+                    enemyScript.TakeDamage(finalDamage);
+
+                    if (GameManager.instance.damageNumbers) //lets you toggle off for performance
+                    {
+                        ShowDamageNumbers(finalDamage.ToString(), collision.GetContact(0).point);
+                    }
+
+                }
+                if (EnemyFired)
+                {
+
                 }
 
-                Enemy enemyScript = collision.gameObject.GetComponent<Enemy>();
-                enemyScript.TakeDamage(finalDamage);
+                    break;
 
-                if (GameManager.instance.damageNumbers) //lets you toggle off for performance
+            case "Player":
+                if(EnemyFired)
                 {
-                    ShowDamageNumbers(finalDamage.ToString(), collision.GetContact(0).point);
-                }
+                    hitCounter++;
+                    if (hitCounter >= maxHits) //this is piercing essentially
+                    {
+                        Destroy(gameObject);
+                    }
 
+                    PlayerHealth playerScript = collision.gameObject.GetComponent<PlayerHealth>();
+                    playerScript.TakeDamage(finalDamage);
+                }
+                if(PlayerFired)
+                {
+
+                }
                 break;
 
         }

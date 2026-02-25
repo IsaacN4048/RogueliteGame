@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa739a2dd6ae554e9344c9d7f4e52d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  PlayerFired: 1
+  EnemyFired: 0
   shotVelocity: 15
   lifetime: 5
   finalDamage: 500
