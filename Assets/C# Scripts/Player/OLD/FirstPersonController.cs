@@ -13,6 +13,8 @@ namespace Player
     {
         [Header("Movement Parameters")]/////////////////////////////////////////////////////////////
 
+        public Vector3 Velocity { get; private set; }
+        Vector3 lastPosition; //implemented for enemy attack prediction
         public float maxSpeed => SprintInput ? sprintSpeed : walkSpeed;
         public float acceleration = 0f;
         public float airAcceleration = 20f;
@@ -149,6 +151,10 @@ namespace Player
 
         void MoveUpdate()
         {
+            Velocity = (transform.position - lastPosition) / Time.deltaTime;
+            lastPosition = transform.position;
+
+
             Vector3 motion = transform.forward * MoveInput.y + transform.right * MoveInput.x;
             motion.y = 0f;
             motion.Normalize();

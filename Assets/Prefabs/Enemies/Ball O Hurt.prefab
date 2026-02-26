@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 878138657351466815}
   - component: {fileID: 8588282357613908520}
   - component: {fileID: 5060549203570368591}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ball O Hurt
   m_TagString: Enemy
   m_Icon: {fileID: 0}
