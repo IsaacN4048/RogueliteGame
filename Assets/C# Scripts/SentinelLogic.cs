@@ -25,23 +25,37 @@ public class SentinelLogic : MonoBehaviour //BECAUSE OF HOW HEALTHBAR LOGIC WORK
                 Sleep();
             Debug.Log("Totem detects No player within radius");
         }
+        if(enemy.currentHealth <= 0) //play animation when it dies, and spawn reward in
+        {
+            Destroy(gameObject);
+        }
         
     }
 
     public void Waken()  //triggers when player enters trigger
     {
         PlayerPresent = true;
-        enemy.SetAlert(true);/////////////////////////////
-        if (!Awake) //only wakes when is asleep
+
+        if (!Awake) //only animates the awake when is asleep
         {
             animator.SetTrigger("Awake");
             Awake = true;
         }
+
+        if (enemy.IsAlert == false) //starts the Attack loop only once, when the player enters the trigger
+        {
+            enemy.IsAlert = true;
+            enemy.CanAttack = true;
+        } 
+
+        //spawn in enemies until the sentinel is destroyed
+        
     }
     public void Sleep() //triggers when player exits aggroRange
     {
         PlayerPresent = false;
-        enemy.SetAlert(false);///////////////////////////////////////////////////////
+        enemy.StopAllCoroutines();
+        enemy.IsAlert = false;
         Awake = false;
         animator.SetTrigger("Sleep");
     }

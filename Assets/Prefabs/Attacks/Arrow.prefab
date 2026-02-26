@@ -158,7 +158,7 @@ MonoBehaviour:
   shotVelocity: 30
   lifetime: 5
   finalDamage: 100
-  cooldown: 0.5
+  cooldown: 1
   hitCounter: 0
   maxHits: 1
   floatingText: {fileID: 4620042306085268388, guid: 037632bf410b0e344a5fd6f2ab588c81, type: 3}

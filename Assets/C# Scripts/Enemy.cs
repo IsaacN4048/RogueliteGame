@@ -1,6 +1,8 @@
+using Player;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -8,6 +10,7 @@ public class Enemy : MonoBehaviour
     private GameObject player;
     private PlayerHealth playerHealth;
     private Transform playerTransform;
+    [SerializeField]private Vector3 lastPlayerPosition;
 
     //public GameObject floatingText;
     //public GameObject floatingTextPos;
@@ -20,24 +23,26 @@ public class Enemy : MonoBehaviour
 
     [Header("Behavior")]
     public bool IsAlert;
+    public bool CanAttack;
 
     [Header("Attacks")]
     public bool FiresProjectiles;
     public GameObject projectile;
     public Transform firePoint;
     public float fireInterval;
-    public float fireForce;
+    public float projectileSpeed;
 
     private Coroutine attackRoutine;
 
     
     //public float damageAmount;
 
-    private void Start()
+    private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealth>();
         playerTransform = player.transform;
+        projectileSpeed = projectile.GetComponent<RangedProjectile>().shotVelocity; //gets the shot velocity from the bullet, maybe change
 
 
         currentHealth = maxHealth;
@@ -46,9 +51,15 @@ public class Enemy : MonoBehaviour
    
     public void Update()
     {   
+        
         if(player != null) 
         {
             MoveToPlayer();
+        }
+        if(CanAttack) //call IsAlert = true in enemy scripts, when you want it to start attacking. To stop, StopAllCouroutines
+        {
+            StartCoroutine(AttackLoop());
+            CanAttack = false;
         }
     }
 
@@ -107,33 +118,52 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator AttackLoop()
     {
-        while(IsAlert) 
-
-        FireProjectile();
+        //while(IsAlert) 
                
         yield return new WaitForSeconds(fireInterval);
+        FireProjectile();
+        CanAttack = true;
     }
 
     private void FireProjectile()
     {
-        
-        GameObject proj = Instantiate(projectile, firePoint.position, Quaternion.identity);
+        Vector3 playerPos = new Vector3(playerTransform.position.x, playerTransform.position.y + 1.1f, playerTransform.position.z);
+        //Vector3 playerPos = playerTransform.position;
+        //Vector3 playerVelocity = (playerPos - lastPlayerPosition) / Time.deltaTime;
+        Vector3 playerVelocity = player.GetComponent<FirstPersonController>().Velocity;
+        lastPlayerPosition = playerPos;
+        Vector3 distanceToPlayer = playerPos - firePoint.position;
+        float distance = distanceToPlayer.magnitude;
+        float timeToHit = distance / projectileSpeed;
+        timeToHit = Mathf.Min(timeToHit, 1.5f);
+        Vector3 predictedPosition = playerPos + playerVelocity * timeToHit;
 
-        RangedProjectile projScript = proj.GetComponent<RangedProjectile>();
+        Vector3 direction = (predictedPosition - firePoint.position).normalized;
 
-        Rigidbody rb = proj.GetComponent<Rigidbody>();
-        Vector3 direction = (playerTransform.position - firePoint.position).normalized;
-        rb.linearVelocity = direction * fireForce;
+        GameObject proj = Instantiate(projectile, firePoint.position, Quaternion.LookRotation(direction));
 
-        Debug.DrawRay(firePoint.position, direction * 10f, Color.red, 2f);
+
+        proj.GetComponent<Rigidbody>().linearVelocity = direction * projectileSpeed;
+        //Rigidbody rb = proj.GetComponent<Rigidbody>();
+        //rb.linearVelocity = direction * projectileSpeed;
+
+        //RangedProjectile projScript = proj.GetComponent<RangedProjectile>();
+
+        Debug.DrawRay(firePoint.position, direction * 30f, Color.red, 2f);
     }
 
 
+   
 
 
 
-
-
+    private void GetPlayerPositionPrediction()
+    {
+        
+       
+        
+        
+    }
 
 
 
