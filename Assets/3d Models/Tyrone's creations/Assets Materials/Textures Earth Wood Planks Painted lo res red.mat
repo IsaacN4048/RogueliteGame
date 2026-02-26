@@ -9,12 +9,10 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Textures Earth Wood Planks Painted lo res red
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_Parent: {fileID: 2100000, guid: e94d28064b7729145b4f131b17b752fd, type: 2}
+  m_Parent: {fileID: 2100000, guid: 517e31a1df7c7984e94c7aa9d456fbf1, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _METALLICSPECGLOSSMAP
   - _NORMALMAP
-  - _SPECULAR_SETUP
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0

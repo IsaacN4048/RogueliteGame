@@ -51,6 +51,8 @@ public class PlayerWeapon : MonoBehaviour
 
     public void Start()
     {
+        inputManagerScript = InputManager.instance;
+
         raycastScript = PlayerRaycast.instance;
         UpdateAttacks();
        
