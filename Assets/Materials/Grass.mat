@@ -27,7 +27,7 @@ Material:
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _EMISSION
-  m_LightmapFlags: 2
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -39,7 +39,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: 90f6681f2a6adf14c84306aa486fd392, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7739da6ed3108bf4a82fff2610ac798a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -59,9 +59,9 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0
-    - _WindSpeed: 2
+    - _WindSpeed: 4
     - _WindStrength: 0.1
     m_Colors:
-    - _Albedo: {r: 0.25702384, g: 0.7132075, b: 0.4461, a: 1}
+    - _Albedo: {r: 0.18384477, g: 0.645283, b: 0.4145639, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
