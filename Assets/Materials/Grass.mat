@@ -59,9 +59,9 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0
-    - _WindSpeed: 4
+    - _WindSpeed: 3
     - _WindStrength: 0.1
     m_Colors:
-    - _Albedo: {r: 0.18384477, g: 0.645283, b: 0.4145639, a: 1}
+    - _Albedo: {r: 0.060911313, g: 0.5471698, b: 0.2562119, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

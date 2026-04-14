@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
             
     }
 
-    public void ToggleDamageNumbers() //confusing imagery when called by button, fix this
+    public void ToggleDamageNumbers() //confusing imagery when called by button, fix this with a bool-checkbox
     {
         if(damageNumbers == true)
         {

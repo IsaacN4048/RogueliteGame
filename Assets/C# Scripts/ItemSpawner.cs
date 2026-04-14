@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class ItemSpawner : MonoBehaviour
 {
     public GameObject ItemToSpawn;
+    public GameObject itemSpawned;
 
     public InputAction spawnItem;
     public InputSystem_Actions playerControls;
@@ -37,5 +38,10 @@ public class ItemSpawner : MonoBehaviour
     public void SpawnItem()
     {
         Instantiate(ItemToSpawn, transform);
+    }
+
+    public void RemoveSpawnedItem()
+    {
+        Destroy(gameObject.transform.GetChild(0).gameObject);
     }
 }
